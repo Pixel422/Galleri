@@ -4,13 +4,17 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/*#region Header & Nav */
+
 header
 {
-    background-color: #262626;
+    background-color: black;
     height: 100px;
     width: 100%;
     position: fixed;
     border-bottom: #6ABDBD 5px solid;
+    font-family: 'Bebas Neue', cursive;
 }
 li
 {
@@ -26,7 +30,7 @@ a{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 60px;
+    padding: 0 30px;
 }
 .nav-menu{
     display: flex;
@@ -34,7 +38,6 @@ a{
     align-items: center;
     gap: 60px;
 }
-
 .nav-branding{
     font-size: 3rem;
 }
@@ -84,17 +87,19 @@ a{
     .nav-menu{
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 100px;
         gap: 0;
         flex-direction: column;
-        background-color: #262626;
+        background-color: black;
         width: 100%;
         text-align: center;
         transition: 0.3s;
+        border-bottom: #6ABDBD 5px solid;
     }
 
     .nav-item{
         margin: 16px 0;
+
     }
 
     .nav-menu.active{
@@ -103,5 +108,79 @@ a{
     
     .ham{
         display: block;
+    }
+}
+
+/*#endregion */
+
+body{
+    background-color: #262626;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+main
+{
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.left-side
+{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-menu
+{
+  width: 100%;
+  height: 50%;
+  border: #FFFAE2 5px solid;
+}
+.category-menu
+{
+  width: 100%;
+  height: 50%;
+  border: #FFFAE2 5px solid;
+}
+
+.card-holder
+{
+  width: 50%;
+  height: 100%;
+}
+
+.card
+{
+  width: 360px;
+  margin: auto;
+  height: 640px;
+  border-radius: 10px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: 0.5vmin solid var(--border);
+  cursor: pointer;
+}
+
+@media (max-width: 768px){
+    .left-side{
+        width: 100%;
+        height: 50%;
+    }
+    main{
+        flex-direction: column;
+        height: 200vh;
+    }
+    .card-holder{
+        width: 100%;
+        height: 50%;
     }
 }

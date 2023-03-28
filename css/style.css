@@ -271,7 +271,7 @@ main {
   background: linear-gradient(#000 10%, #151515 10%);
   background-position: 0% 0%;
   background-size: 100% 9px;
-  transition: 300ms ease;
+  transition: 0.5s ease;
   z-index: -1;
   animation: backdrop 20s infinite linear;
 }
@@ -302,64 +302,21 @@ main {
   right: 0;
 }
 
-#categories-list {
-  width: 80%;
-  position: relative;
-  top: 35%;
-  transform: translateY(-50%);
-  margin: auto;
-  border: #fffae2 2px solid;
-  background-color: #262626;
+.button-to-server {
+  width: 25%;
+  height: 100%;
+  cursor: pointer;
+  background-color: rgba(255, 250, 226, 0.1);
+  border: rgba(255, 250, 226, 0.1) 0.5vmin solid;
   border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 2rem;
-}
-
-.category-frame {
-  width: 100%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-}
-
-.category-menu {
-  width: 75%;
-  height: 65%;
-  position: relative;
-  top: 30%;
-  transform: translateY(-42%);
-  margin: auto;
-  border: 0.5vmin solid #6abdbd;
-  border-radius: 10px;
-  text-align: center;
+  font-size: 1.5rem;
   transition: 0.3s ease;
-  background-color: rgba(0, 0, 0, 0.4);
-  background-blend-mode: multiply;
-  overflow: hidden;
 }
 
-.category-menu span {
-  height: 50%;
-  width: 100%;
-  position: fixed;
-  background-color: #000;
-  transition: 300ms ease;
-  z-index: -1;
-}
-
-.category-menu:hover {
-  transform: scale(1.1) translateY(-45%);
-}
-
-.category-menu:hover .darken-left {
-  left: 0;
-}
-
-.category-menu:hover .darken-right {
-  right: 0;
+.button-to-server:hover {
+  background-color: #478080;
+  border: rgba(255, 250, 226, 0.2) 0.5vmin solid;
+  transform: scale(1.1);
 }
 
 .card-holder {

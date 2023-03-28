@@ -55,22 +55,98 @@
           <div class="upload-menu">
             <span class="darken-right"></span>
             <span class="darken-left"></span>
-            <input type="file" id="image-input" accept="image/png, image/jpg" />
+              <div class="input-div">
+                <div class="upload-top">
+                    <div class="server-message"></div>
+                    <p>
+                        Drag & drop images here or <span class="browse">Browse</span>
+                      </p>
+                      <input
+                        type="file"
+                        class="file"
+                        multiple="multiple"
+                        accept="image/png, image/jpg, image/jpeg"
+                      />
+                </div>
+                <form id="queued-form">
+                  <div class="header">
+                    <h3>Queued Images</h3>
+                    <button type="submit">Upload</button>
+                  </div>
+                  <div class="queued-div"></div>
+                </form>
+              </div>
+            </div>
+            <!-- <input type="file" id="image-input" accept="image/png, image/jpg" />
             <label
               for="image-input"
               class="upload-label"
               data-value="Upload Image"
               >Upload Image</label
-            >
+            > -->
           </div>
         </div>
-        <div class="category-frame">
+
+        <script>
+          let queuedImagesArray = [],
+            queuedForm = document.querySelector("#queued-form"),
+            queuedDiv = document.querySelector(".queued-div"),
+            inputDiv = document.querySelector(".input-div"),
+            input = document.querySelector(".input-div input"),
+            serverMessage = document.querySelector(".server-message");
+
+          // SAVED IN SERVER IMAGES
+
+          // QUEUED IMAGES
+          input.addEventListener("change", () => {
+            let files = input.files;
+              files = input.files;
+              for (let i = 0; i < files.length; i++) {
+                queuedImagesArray.push(files[i]);
+              }
+              queuedForm.reset();
+            displayQueuedImages();
+          });
+
+          inputDiv.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const files = e.dataTransfer.files;
+            for (let i = 0; i < files.length; i++) {
+              if (!files[i].type.match("image")) continue;
+
+              if (
+                queuedImagesArray.every((image) => image.name !== files[i].name)
+              ) {
+                queuedImagesArray.push(files[i]);
+              }
+            }
+            displayQueuedImages();
+          });
+
+          function displayQueuedImages() {
+            let images = "";
+            queuedImagesArray.forEach((image, index) => {
+              images += `<div class="image">
+            <img src="${URL.createObjectURL(image)}" alt="image" />
+            <span onclick="removeQueuedImage(${index})">x</span>
+        </div>`;
+            });
+            queuedDiv.innerHTML = images;
+          }
+
+          function removeQueuedImage(index) {
+            queuedImagesArray.splice(index, 1);
+            displayQueuedImages();
+          }
+        </script>
+
+        <!-- <div class="category-frame">
           <div class="category-menu">
             <span class="darken-right"></span>
             <span class="darken-left"></span>
             <input type="text" id="categories-list" placeholder="Categories" />
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="card-holder">
         <a

@@ -12,19 +12,19 @@ document.querySelectorAll(".nav-link").forEach((n) =>
   })
 );
 
-const imageInput = document.querySelector("#image-input");
-var uploadedImage = "";
+// const imageInput = document.querySelector("#image-input");
+// var uploadedImage = "";
 
-imageInput.addEventListener("change", function () {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => {
-    uploadedImage = reader.result;
-    document.querySelector(
-      ".card"
-    ).style.backgroundImage = `url(${uploadedImage})`;
-  });
-  reader.readAsDataURL(this.files[0]);
-});
+// imageInput.addEventListener("change", function () {
+//   const reader = new FileReader();
+//   reader.addEventListener("load", () => {
+//     uploadedImage = reader.result;
+//     document.querySelector(
+//       ".card"
+//     ).style.backgroundImage = `url(${uploadedImage})`;
+//   });
+//   reader.readAsDataURL(this.files[0]);
+// });
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 document.querySelector(".upload-label").onmouseover = (event) => {

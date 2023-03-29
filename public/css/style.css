@@ -1,0 +1,370 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #fffae2;
+  font-family: "Bebas Neue", cursive;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+}
+
+/*#region Header & Nav */
+
+header {
+  background-color: #101010;
+  height: 100px;
+  width: 100%;
+  position: fixed;
+  border-bottom: #6abdbd 5px solid;
+  z-index: 100;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.navbar {
+  min-height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+.nav-branding {
+  font-size: 3rem;
+}
+.nav-link {
+  transition: 0.3s ease;
+  font-size: 2rem;
+}
+.nav-link:hover {
+  color: #6abdbd;
+}
+.ham {
+  display: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.hamRotate.active {
+  transform: rotate(45deg);
+}
+.hamRotate180.active {
+  transform: rotate(180deg);
+}
+.line {
+  fill: none;
+  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+  stroke: #fffae2;
+  stroke-width: 5.5;
+  stroke-linecap: round;
+}
+.ham1 .top {
+  stroke-dasharray: 40 139;
+}
+.ham1 .bottom {
+  stroke-dasharray: 40 180;
+}
+.ham1.active .top {
+  stroke-dashoffset: -98px;
+}
+.ham1.active .bottom {
+  stroke-dashoffset: -138px;
+}
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    left: -100%;
+    top: 100px;
+    gap: 0;
+    flex-direction: column;
+    background-color: #101010;
+    width: 100%;
+    text-align: center;
+    transition: 0.3s;
+    border-bottom: #6abdbd 5px solid;
+  }
+
+  .nav-item {
+    margin: 16px 0;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .ham {
+    display: block;
+  }
+}
+
+/*#endregion */
+
+body {
+  display: flex;
+  height: 100vh;
+  background: radial-gradient(rgba(0, 0, 0, 0.5) 10%, transparent 10%);
+  background-blend-mode: multiply;
+  background-position: 0% 0%;
+  background-size: 5vmin 5vmin;
+  animation: infinite 120s linear background;
+  background-color: #262626;
+}
+
+main {
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+@keyframes background {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+}
+
+.left-side {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-frame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-menu {
+  width: 75%;
+  height: 70%;
+  position: relative;
+  top: 35%;
+  transform: translateY(-50%);
+  margin: auto;
+  background-color: #101010;
+  border: 0.5vmin solid #6abdbd;
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply;
+  overflow: hidden;
+}
+
+.upload-menu:hover {
+  transform: scale(1.1) translateY(-45%);
+}
+
+.server-message {
+  margin-top: 10px;
+  height: 10%;
+  width: 100%;
+}
+
+.input-div {
+  width: 100%;
+  height: 100%;
+  font-size: 2rem;
+}
+
+.upload-top {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+  position: relative;
+}
+
+.upload-top p {
+  margin-top: 80px;
+  text-decoration: underline #6abdbd;
+}
+
+.file {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.header {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+#queued-form {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 10px;
+  border-top: #6abdbd 0.5vmin solid;
+}
+
+.queued-div {
+  width: 100%;
+  height: 70%;
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: rgba(255, 250, 226, 0.1);
+  border: rgba(255, 250, 226, 0.1) 0.5vmin solid;
+  border-radius: 10px;
+}
+
+.image {
+  max-height: 100%;
+  position: relative;
+}
+
+.image img {
+  border: #6abdbd 0.5vmin solid;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.image span {
+  position: absolute;
+  cursor: pointer;
+  right: 7px;
+  top: 5px;
+  transition: 0.2s ease;
+}
+
+.image span:hover {
+  color: red;
+}
+
+.upload-menu > span {
+  height: 50%;
+  width: 100%;
+  position: fixed;
+  background: linear-gradient(#000 10%, #151515 10%);
+  background-position: 0% 0%;
+  background-size: 100% 9px;
+  transition: 0.5s ease;
+  z-index: -1;
+  animation: backdrop 20s infinite linear;
+}
+
+@keyframes backdrop {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% -100%;
+  }
+}
+
+.darken-left {
+  left: -100%;
+  top: 50%;
+}
+
+.darken-right {
+  right: -100%;
+}
+
+.upload-menu:hover .darken-left {
+  left: 0;
+}
+
+.upload-menu:hover .darken-right {
+  right: 0;
+}
+
+.button-to-server {
+  width: 25%;
+  height: 100%;
+  cursor: pointer;
+  background-color: rgba(255, 250, 226, 0.1);
+  border: rgba(255, 250, 226, 0.1) 0.5vmin solid;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  transition: 0.3s ease;
+}
+
+.button-to-server:hover {
+  background-color: #478080;
+  border: rgba(255, 250, 226, 0.2) 0.5vmin solid;
+  transform: scale(1.1);
+}
+
+.card-holder {
+  width: 30%;
+  height: 100%;
+}
+
+.card {
+  width: 360px;
+  margin: auto;
+  height: 640px;
+  border-radius: 10px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+
+  border: 0.5vmin solid #6abdbd;
+  cursor: pointer;
+
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply;
+
+  transition: 0.3s ease;
+}
+.card:hover {
+  background-color: transparent;
+  transform: scale(1.1) translateY(-45%);
+}
+
+@media (max-width: 768px) {
+  .left-side {
+    width: 100%;
+    height: 50%;
+  }
+  main {
+    flex-direction: column;
+    height: 200vh;
+  }
+  .card-holder {
+    width: 100%;
+    height: 50%;
+  }
+}

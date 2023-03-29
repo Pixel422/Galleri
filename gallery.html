@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overview</title>
+    <link rel="stylesheet" href="public/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+
+    <script defer src="js/script.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <a href="http://localhost:3000/gallery" class="nav-branding">Gallery</a>
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="http://localhost:3000/" class="nav-link">Overview</a>
+          </li>
+          <li class="nav-item">
+            <a href="http://localhost:3000/categories" class="nav-link">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a href="http://localhost:3000/search" class="nav-link">Search</a>
+          </li>
+        </ul>
+        <svg
+          class="ham hamRotate ham1"
+          viewBox="0 0 100 100"
+          width="80"
+          onclick="this.classList.toggle('active')"
+        >
+          <path
+            class="line top"
+            d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40"
+          />
+          <path class="line middle" d="m 30,50 h 40" />
+          <path
+            class="line bottom"
+            d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40"
+          />
+        </svg>
+      </nav>
+    </header>
+
+    <main>
+
+        <script>
+          let queuedImagesArray = [],
+            queuedForm = document.querySelector("#queued-form"),
+            queuedDiv = document.querySelector(".queued-div"),
+            inputDiv = document.querySelector(".input-div"),
+            input = document.querySelector(".input-div input"),
+            serverMessage = document.querySelector(".server-message");
+
+          // SAVED IN SERVER IMAGES
+
+          // QUEUED IMAGES
+          input.addEventListener("change", () => {
+            let files = input.files;
+              files = input.files;
+              for (let i = 0; i < files.length; i++) {
+                queuedImagesArray.push(files[i]);
+              }
+              queuedForm.reset();
+            displayQueuedImages();
+          });
+
+          inputDiv.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const files = e.dataTransfer.files;
+            for (let i = 0; i < files.length; i++) {
+              if (!files[i].type.match("image")) continue;
+
+              if (
+                queuedImagesArray.every((image) => image.name !== files[i].name)
+              ) {
+                queuedImagesArray.push(files[i]);
+              }
+            }
+            displayQueuedImages();
+          });
+
+          function displayQueuedImages() {
+            let images = "";
+            queuedImagesArray.forEach((image, index) => {
+              images += `<div class="image">
+            <img src="${URL.createObjectURL(image)}" alt="image" />
+            <span onclick="removeQueuedImage(${index})">x</span>
+        </div>`;
+            });
+            queuedDiv.innerHTML = images;
+          }
+
+          function removeQueuedImage(index) {
+            queuedImagesArray.splice(index, 1);
+            displayQueuedImages();
+          }
+
+          queuedForm.addEventListener("submit", (e) => {
+            e.preventDefault()
+            sendQueuedImagesToServer();
+          })
+
+          function sendQueuedImagesToServer(){
+            const formData = new FormData(queuedForm);
+
+            queuedImagesArray.forEach((image, index) => {
+              formData.append(`file[${index}]`, image);
+            });
+
+            fetch("upload", 
+            {method: "POST",
+            body : formData})
+
+            .then(response => {
+              if(response.status !== 200) throw Error(response.statusText);
+              location.reload();
+            })
+
+            .catch(error => {
+              serverMessage.innerHTML = error;
+              serverMessage.style.color = "red";
+            })
+          }
+        </script>
+
+      <div class="card-holder">
+        <a
+          href=""
+          class="card"
+          style="background-image: url(../img/test.png)"
+        ></a>
+      </div>
+    </main>
+  </body>
+</html>
